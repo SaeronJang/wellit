@@ -1,15 +1,13 @@
 package com.wellit.project.member;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.wellit.project.order.Cart;
+import com.wellit.project.shop.FavoriteProduct;
 import jakarta.persistence.*;
-import org.hibernate.validator.constraints.Length;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wellit.project.store.FavoriteStore;
 
@@ -94,4 +92,7 @@ public class Member {
 	    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
 	    @JsonManagedReference // 추가
 	    private List<FavoriteStore> favoriteStores;
+
+		@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+		private List<FavoriteProduct> favoriteProductList = new ArrayList<>();
 }

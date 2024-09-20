@@ -51,6 +51,7 @@ public class MemberController {
     private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
+    private final OrderService orderService;
 
     @GetMapping("/login")
     public String getLogin(@RequestParam(value = "error", required = false) String error, Model model) {
@@ -629,17 +630,12 @@ public class MemberController {
 
 
 
-    @Autowired
-    private final OrderService orderService;
 
 
 
-    @GetMapping("/mypage2")
-    public String getMypageYs(Model model,
-                              @RequestParam(value = "search", required = false) String search,
-                              @RequestParam(value = "status", required = false) String status,
-                              @RequestParam(value = "page", defaultValue = "0") int page
-                              ) {
+
+    @GetMapping("/mypage/orderhistory")
+    public String getOrderHistory(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -661,14 +657,6 @@ public class MemberController {
         return "/order/mypage_orderHistory";
     }
 
-    @GetMapping("/mypage2/")
-    public String getOrderList(
-            ) {
-
-
-
-        return "/order/admin_polist";
-    }
 
 
 }
