@@ -48,21 +48,12 @@ public class ProdReview {
         this.updatedAt = LocalDateTime.now();
     }
 
+    private String writer;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    @JsonBackReference
-    private Member author;
 
-    private String writer;  //추후 삭제하고 Member로 대체
-
-    @ManyToOne
-    @JoinColumn(name = "prod_id")
-    @JsonIgnore
-    private Product product;
 
     @OneToMany(mappedBy = "prodReview", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+//    @JsonManagedReference
     private List<ProdReviewImg> prodReviewImgList = new ArrayList<>();
 
     @OneToOne

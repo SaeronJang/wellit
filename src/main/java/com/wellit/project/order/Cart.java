@@ -1,5 +1,6 @@
 package com.wellit.project.order;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.wellit.project.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public class Cart {
 
     @OneToOne
     @JoinColumn(name = "member_id")
+    @JsonBackReference("member-cart")
     private Member member;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
